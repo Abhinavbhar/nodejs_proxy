@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Your Application Service
+  app:
+    build: .  # This tells Docker Compose to build the image from the Dockerfile in the current directory
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+# Volumes for persistent storage
+volumes:
+  mongodb_data:
+
+# Network for service communication
+networks:
+  app-network:
+    driver: bridge
+

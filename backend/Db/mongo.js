@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
 // MongoDB connection URI
-const MONGO_URI = 'mongodb://localhost:27017/proxy';
+const MONGO_URI = 'mongodb://mongo:27017/proxy';
 
 // Connection options
 const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
     autoIndex: true, // Build indexes
     maxPoolSize: 10, // Maintain up to 10 socket connections
