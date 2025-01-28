@@ -38,6 +38,14 @@
   font-style: italic;
   font-family:fantasy;
 }
+.content{
+  background-color: rgba(106, 106, 106, 0.324);
+  border-radius: 100px;
+}
+.animatedText{
+  color:forestgreen;
+  font-weight:900;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
