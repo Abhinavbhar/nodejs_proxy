@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Positions title on the left and buttons on the right */
+  align-items: center; /* Vertically centers items */
+  padding: 10px; /* Maintain existing padding */
+  height: 100px;
+}
+
+.navbar button {
+  margin-left: 10px; /* Adds space between buttons */
+}
+
+.btn {
+  background-color: rgba(0, 0, 0, 0);
+  color: chartreuse;
+  font-size: 30px;
+  font-family: monospace;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Change background color on hover */
+  transform: scale(1.1); /* Zoom effect */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  color:red;
+}
+.contentText{
+  font-weight: 900;
+  font-style: italic;
+  font-family:fantasy;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
