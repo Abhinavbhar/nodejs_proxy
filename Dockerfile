@@ -4,7 +4,7 @@ FROM node:18-alpine
 EXPOSE 8080 3000
 
 WORKDIR /app
-
+#hello world
 # Copy package files first for optimal caching
 COPY ./backend/package*.json ./
 RUN npm install --production
