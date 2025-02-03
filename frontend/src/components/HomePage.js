@@ -1,17 +1,11 @@
-
-//----------------------------------------------------------------------------------
-import React, { useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import Example from './Example'; // Importing the Example component
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = [
-  '/slide1.jpg',
-  '/slide2.jpg',
-  '/slide3.jpg',
-  '/slide4.jpg'
-];
+const images = ["/slide1.jpg", "/slide2.jpg", "/slide3.jpg", "/slide4.jpg"];
 
 const Slideshow = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -26,18 +20,20 @@ const Slideshow = () => {
 
   useEffect(() => {
     gsap.fromTo(
-      ".slideshow", 
-      { scale: 0.8 }, 
+      ".slideshow",
+      { scale: 0.8 },
       {
         scale: 1.2,
         scrollTrigger: {
-          trigger: ".content img", // Trigger when the content image is scrolled into view
-          start: "40% center",
-          end: "100% center",
+          trigger: ".slideshow", // Changed trigger to the slideshow element
+          start: "top 80%", // Adjusted start position
+          end: "bottom 20%", // Adjusted end position
           scrub: true,
-          onEnter: () => gsap.to("body", { backgroundColor: "black", duration: 0.5 }),
-          onLeaveBack: () => gsap.to("body", { backgroundColor: "white", duration: 0.5 })
-        }
+          onEnter: () =>
+            gsap.to("body", { backgroundColor: "black", duration: 0.5 }),
+          onLeaveBack: () =>
+            gsap.to("body", { backgroundColor: "white", duration: 0.5 }),
+        },
       }
     );
   }, []);
@@ -75,6 +71,9 @@ const Slideshow = () => {
 };
 
 const HomePage = () => {
+  const [videoUrl, setVideoUrl] = useState(
+    "https://www.youtube.com/embed/1-2Q9QigtXY"
+  ); // Default video URL
   const [textColor, setTextColor] = useState("white"); // Default text color
 
   useEffect(() => {
@@ -131,8 +130,8 @@ const HomePage = () => {
 
   useEffect(() => {
     gsap.fromTo(
-      ".animatedText span", 
-      { opacity: 0, x: -50, y: -30 }, 
+      ".animatedText span",
+      { opacity: 0, x: -50, y: -30 },
       {
         opacity: 1,
         x: 0,
@@ -152,7 +151,10 @@ const HomePage = () => {
   return (
     <div>
       {/* Navbar */}
-      <div className="navbar" style={{ backgroundColor: "lightgreen", padding: "10px" }}>
+      <div
+        className="navbar"
+        style={{ backgroundColor: "lightgreen", padding: "10px" }}
+      >
         <div
           className="title"
           style={{
@@ -226,9 +228,11 @@ const HomePage = () => {
           }}
         >
           <p className="animatedText">
-            {"🔻SCROLL DOWN MORE TO GET STARTED!!!.🔻".split("").map((char, index) => (
-              <span key={index}>{char}</span>
-            ))}
+            {"🔻SCROLL DOWN MORE TO GET STARTED!!!.🔻"
+              .split("")
+              .map((char, index) => (
+                <span key={index}>{char}</span>
+              ))}
           </p>
         </div>
       </div>
@@ -238,20 +242,72 @@ const HomePage = () => {
         <Slideshow />
       </div>
 
+      {/* Toggle Buttons */}
+      <div
+        className="toogleButton"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "120px 0",
+          maxWidth: "300px",
+          marginLeft: "40%",
+          gap:'50px'
+        }}
+      >
+        <button
+          onClick={() => {
+            setVideoUrl("https://www.youtube.com/embed/1-2Q9QigtXY");
+          }}
+          style={{
+            // backgroundColor: activeButton === "windows" ? "lightblue" : "white",
+            marginRight: "50px",
+            scale: "1.5",
+            fontWeight: "bolder",
+          }}
+        >
+          WINDOWS
+        </button>
+        <button
+          onClick={() => {
+            setVideoUrl("https://www.youtube.com/embed/ioESXG_IXR0");
+          }}
+          style={{
+            // backgroundColor: activeButton === "windows" ? "lightblue" : "white",
+
+            scale: "1.5",
+            fontWeight: "bolder",
+          }}
+        >
+          MOBILE
+        </button>
+      </div>
+
+
       {/* How to Use Section */}
       <div style={{ marginTop: "20px" }}>
-        <h2>How to Use</h2>
-        <div style={{ display: "flex" }}>
-          <div style={{ flex: 1 }}>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/video_id"
-              title="YouTube video"
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "20px",
+          }}
+        >
+          <iframe
+            width="1080"
+            height="720"
+            src={videoUrl}
+            title="YouTube video"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            style={{
+              border: "10px solid white",
+              borderRadius: "10px", // Optional for rounded corners
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.3)", // Optional for a shadow effect
+            }}
+          ></iframe>
         </div>
       </div>
 

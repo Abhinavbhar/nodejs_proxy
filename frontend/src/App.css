@@ -46,8 +46,35 @@
   color:forestgreen;
   font-weight:900;
 }
+.toogleButton button {
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect: Zoom-in, Highlight, and Fade-in */
+.toogleButton button:hover {
+  background-color: lightblue;
+  transform: scale(1.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Active button effect for smooth transition */
+.toogleButton button:active {
+  transform: scale(1.05);
+  transition: transform 0.1s ease;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+
