@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -18,6 +19,19 @@
 .navbar button {
   margin-left: 10px; /* Adds space between buttons */
 }
+
+.backToTop {
+  position: relative;
+  bottom: 30px;
+  left: 1300px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgba(240, 248, 255, 0);
+  transition: background-color 0.3s;
+  width: 10%;
+}
+
 
 .btn {
   background-color: rgba(0, 0, 0, 0);

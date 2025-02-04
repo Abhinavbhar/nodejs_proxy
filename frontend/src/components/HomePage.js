@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import Example from './Example'; // Importing the Example component
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // Importing ScrollToPlugin
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Registering ScrollToPlugin
 
 const images = ["/slide1.jpg", "/slide2.jpg", "/slide3.jpg", "/slide4.jpg"];
 
@@ -25,9 +25,9 @@ const Slideshow = () => {
       {
         scale: 1.2,
         scrollTrigger: {
-          trigger: ".slideshow", // Changed trigger to the slideshow element
-          start: "top 80%", // Adjusted start position
-          end: "bottom 20%", // Adjusted end position
+          trigger: ".slideshow",
+          start: "top 80%",
+          end: "bottom 20%",
           scrub: true,
           onEnter: () =>
             gsap.to("body", { backgroundColor: "black", duration: 0.5 }),
@@ -73,17 +73,15 @@ const Slideshow = () => {
 const HomePage = () => {
   const [videoUrl, setVideoUrl] = useState(
     "https://www.youtube.com/embed/1-2Q9QigtXY"
-  ); // Default video URL
-  const [textColor, setTextColor] = useState("white"); // Default text color
+  );
+  const [textColor, setTextColor] = useState("white");
 
   useEffect(() => {
-    // GSAP animations for initial loading
     gsap.from(".navbar", { duration: 1, y: -50, opacity: 0 });
     gsap.from(".content", { duration: 1, opacity: 0, delay: 0.5 });
 
-    // GSAP animation for navbar color change
     ScrollTrigger.create({
-      trigger: ".section-two", // Replace with your actual section class
+      trigger: ".section-two",
       start: "top 50%",
       end: "bottom 0%",
       onEnter: () => {
@@ -94,28 +92,25 @@ const HomePage = () => {
       },
     });
 
-    // Tubelight effect for text color
     const colors = ["white", "teal"];
     let index = 0;
     const interval = setInterval(() => {
       setTextColor(colors[index]);
       index = (index + 1) % colors.length;
-    }, 250); // Change color every 300ms
+    }, 250);
 
-    // Stop after 5 seconds
     const timeout = setTimeout(() => {
       clearInterval(interval);
-      setTextColor("white"); // Set final color to white
-    }, 2500); // Stop after 3.5 seconds
+      setTextColor("white");
+    }, 2500);
 
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
-    }; // Cleanup on unmount
+    };
   }, []);
 
   useEffect(() => {
-    // Animation for content image on initial load
     gsap.fromTo(
       ".contentImage",
       { scale: 0.5, opacity: 0 },
@@ -148,6 +143,10 @@ const HomePage = () => {
     );
   }, []);
 
+  const scrollToTop = () => {
+    gsap.to(window, { scrollTo: 0, duration: 1 });
+  };
+
   return (
     <div>
       {/* Navbar */}
@@ -168,7 +167,7 @@ const HomePage = () => {
         >
           PROXIFY
         </div>
-        <div style={{ marginLeft: "10px" }}>
+        <div style={{ marginLeft: "10px",border:'none' }}>
           <button className="btn">Home</button>
           <button className="btn">About</button>
           <button className="btn">Login/Sign Up</button>
@@ -208,7 +207,7 @@ const HomePage = () => {
             fontSize: "150px",
             textAlign: "left",
             font: "-moz-initial",
-            transition: "color 0.5s ease", // Smooth transition for color change
+            transition: "color 0.5s ease",
           }}
         >
           SIMPLIFLYING ACCESS, ENHANCING COLLABORATION
@@ -252,7 +251,7 @@ const HomePage = () => {
           margin: "120px 0",
           maxWidth: "300px",
           marginLeft: "40%",
-          gap:'50px'
+          gap: '50px'
         }}
       >
         <button
@@ -260,7 +259,6 @@ const HomePage = () => {
             setVideoUrl("https://www.youtube.com/embed/1-2Q9QigtXY");
           }}
           style={{
-            // backgroundColor: activeButton === "windows" ? "lightblue" : "white",
             marginRight: "50px",
             scale: "1.5",
             fontWeight: "bolder",
@@ -273,16 +271,13 @@ const HomePage = () => {
             setVideoUrl("https://www.youtube.com/embed/ioESXG_IXR0");
           }}
           style={{
-            // backgroundColor: activeButton === "windows" ? "lightblue" : "white",
-
             scale: "1.5",
             fontWeight: "bolder",
           }}
         >
-          MOBILE
+          ANDROID
         </button>
       </div>
-
 
       {/* How to Use Section */}
       <div style={{ marginTop: "20px" }}>
@@ -304,18 +299,22 @@ const HomePage = () => {
             allowFullScreen
             style={{
               border: "10px solid white",
-              borderRadius: "10px", // Optional for rounded corners
-              boxShadow: "0px 4px 10px rgba(0,0,0,0.3)", // Optional for a shadow effect
+              borderRadius: "10px",
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
             }}
           ></iframe>
         </div>
       </div>
 
-      {/* Final Section */}
-      <div style={{ marginTop: "20px" }}>
-        <p>Line description goes here.</p>
-        <button style={{ backgroundColor: "lightgreen" }}>Get Started</button>
-      </div>
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        onMouseEnter={() => gsap.to(".backToTop", { rotation: 180, duration: 0.5 })}
+        onMouseLeave={() => gsap.to(".backToTop", { rotation: 0, duration: 0.5 })}
+        className="backToTop"
+      >
+        <img width={'50%'} height={'50%'} src="\down-arrow_11044540.png" alt="" />
+      </button>
     </div>
   );
 };
