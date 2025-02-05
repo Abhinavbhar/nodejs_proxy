@@ -1,0 +1,154 @@
+/* Base Styles */
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 40px;
+    max-width: 90%;
+    max-height: 100%;
+    width: 80vw;
+    height: 100vh;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Light Mode */
+  .dashboard-container.light {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  .btnD{
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(72, 131, 14);
+    font-size: 30px;
+    font-family: monospace;
+    border-width: 7px;
+    border-style: 'inset';
+    border-color: rgb(72, 131, 14);
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+  
+  }
+  
+  .btnD:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Change background color on hover */
+    transform: scale(1.1); /* Zoom effect */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    color:red;
+  }
+  /* Dark Mode */
+  .dashboard-container.dark {
+    background-color: #333;
+    color: #f9f9f9;
+  }
+  
+  /* Header */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+  }
+  
+  .dashboard-header .user-name {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .dashboard-header .theme-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .theme-toggle span {
+    font-size: 1.2em;
+  }
+  
+  .theme-toggle button {
+    font-size: 1.5em;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* Traffic Section */
+  .traffic-section {
+    margin: 20px 0;
+    position: relative;
+  }
+  
+  .traffic-circle {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+    background: conic-gradient(#ddd 0%, #4caf50 0%);
+    border-radius: 50%;
+  }
+  
+  .traffic-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  /* Traffic Stats */
+  .traffic-stats {
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+  
+  /* Connected Devices Section */
+  .devices-section {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .devices-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .devices-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .devices-list li {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  .devices-list li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Dark Mode Specific Styles */
+  .dashboard-container.dark .devices-list li {
+    background-color: #444;
+    color: #f9f9f9;
+    border: 1px solid #555;
+  }
+  
+  .dashboard-container.dark .devices-list li:hover {
+    background-color: #555;
+  }
+  

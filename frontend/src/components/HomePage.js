@@ -147,6 +147,7 @@ const HomePage = () => {
     gsap.to(window, { scrollTo: 0, duration: 1 });
   };
 
+
   return (
     <div>
       {/* Navbar */}
@@ -162,16 +163,23 @@ const HomePage = () => {
             fontWeight: "bold",
             color: "chartreuse",
             fontSize: "80px",
-            fontFamily: "-moz-initial",
+            // fontFamily: "-moz-initial",
           }}
         >
-          PROXIFY
+          EchoNet
         </div>
-        <div style={{ marginLeft: "10px",border:'none' }}>
-          <button className="btn">Home</button>
-          <button className="btn">About</button>
-          <button className="btn">Login/Sign Up</button>
-        </div>
+        <button
+        className="btn"
+        onClick={() => window.location.reload()} // Refresh the page
+      >
+        Home
+      </button>
+      <button className="btn" >
+        Dashboard
+      </button>
+      <button className="btn" >
+        Login/Sign Up
+      </button>
       </div>
 
       {/* SVG Section */}
@@ -223,7 +231,7 @@ const HomePage = () => {
             fontSize: "30px",
             marginLeft: "25%",
             color: "HighlightText",
-            fontFamily: "cursive",
+            fontFamily: "-moz-initial",
           }}
         >
           <p className="animatedText">
