@@ -9,11 +9,12 @@ const users = new Map()
 
 
 
-server.on("connection", (clientToProxySocket) => {
+server.on("connection", async(clientToProxySocket) => {
     //console.log("Client connected to proxy");
-        const valid =ip(clientToProxySocket.remoteAddress)
-        if(!valid){
-            clientToProxySocket.end()
+        const valid =await ip(clientToProxySocket.remoteAddress)
+        console.log(valid)
+         if(!valid){
+         clientToProxySocket.end()
             return
         }
     
@@ -38,7 +39,7 @@ server.on("connection", (clientToProxySocket) => {
         }
         console.log(serverAddress);
 
-        // Creating a connection from proxy to destination server
+        // Creating a connection from proxy to destination serverhttps://i.ytimg.com/sb/DfDWyH42JIE/storyboard3_L2/M2.jpg?sqp=-oaymwENSDfyq4qpAwVwAcABBqLzl_8DBgi_3NG9Bg==&sigh=rs%24AOn4CLDykn6BSOIfkwK1187ZNNkpZ-obnA
         let proxyToServerSocket = net.createConnection(
             {
                 host: serverAddress,
@@ -49,7 +50,7 @@ server.on("connection", (clientToProxySocket) => {
             }
         );
 
-
+        
         if (isTLSConnection) {
             clientToProxySocket.write("HTTP/1.1 200 OK\r\n\r\n");
         } else {
@@ -61,6 +62,7 @@ server.on("connection", (clientToProxySocket) => {
         let bandwidth = clientToProxySocket.bytesRead+clientToProxySocket.bytesWritten
         let CurrentBandwidth =users.get(clientToProxySocket.remoteAddress)
         let updated = CurrentBandwidth+bandwidth
+        //
         if(updated>5000){
             updateBandwidth(clientToProxySocket.remoteAddress,updated,client)
             users.set(clientToProxySocket.remoteAddress,0)

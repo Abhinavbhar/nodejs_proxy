@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // Importing ScrollToPlugin
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import {  useNavigate } from "react-router"; // Importing ScrollToPlugin
+import axios from "axios";
+
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin); // Registering ScrollToPlugin
 
@@ -10,6 +13,7 @@ const images = ["/slide1.jpg", "/slide2.jpg", "/slide3.jpg", "/slide4.jpg"];
 const Slideshow = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prevImage) => (prevImage + 1) % images.length);
@@ -19,6 +23,7 @@ const Slideshow = () => {
   }, []);
 
   useEffect(() => {
+  
     gsap.fromTo(
       ".slideshow",
       { scale: 0.8 },
@@ -71,6 +76,28 @@ const Slideshow = () => {
 };
 
 const HomePage = () => {
+const [user,setUser]=useState(null)
+
+  useEffect( ()=>{
+   const updateUser =async()=>{
+    const token = `bearer ${localStorage.getItem('token')}`
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/main/checklogin`,{
+        headers:{
+          Authorization:token
+        }
+      })
+      const gmail = response.data.user
+      const name =gmail.split("@")[0]
+      setUser(name)
+    } catch (error) {
+
+    }
+   }
+   updateUser()
+  },[])
+
+  const navigate = useNavigate()
   const [videoUrl, setVideoUrl] = useState(
     "https://www.youtube.com/embed/1-2Q9QigtXY"
   );
@@ -147,7 +174,6 @@ const HomePage = () => {
     gsap.to(window, { scrollTo: 0, duration: 1 });
   };
 
-
   return (
     <div>
       {/* Navbar */}
@@ -174,12 +200,14 @@ const HomePage = () => {
       >
         Home
       </button>
-      <button className="btn" >
+      <button className="btn" onClick={()=>navigate("dashboard")} >
         Dashboard
       </button>
-      <button className="btn" >
-        Login/Sign Up
-      </button>
+          {user?  <button className="btn" >
+          {user}
+    </button>:  <button className="btn" onClick={() => navigate("/login")}>
+        login/signup
+    </button>}
       </div>
 
       {/* SVG Section */}

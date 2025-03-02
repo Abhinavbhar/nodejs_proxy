@@ -1,19 +1,25 @@
-import User from "../Db/userSchema.js"
+import User from "../Db/userSchema.js";
 
-const updateBandwidth=async(ip,bandwidth)=>{
-    const existingUser = await User.findOne({ipAddress:ip})
-    if(!existingUser){
-        const newUser =new User({
-            ipAddress:ip,
-            bandwidthUsed:bandwidth
-        })
-        await newUser.save()
-        
+const updateBandwidth = async (ip, bandwidth) => {
+    try {
+        // Find a user whose `ipAddresses` array contains the given IP
+        const existingUser = await User.findOne({ ipAddresses: ip });
+
+        if (!existingUser) {
+            // If no user found, create a new one with `ipAddresses` as an array
+            const newUser = new User({
+                ipAddresses: [ip], // Store IP inside an array
+                bandwidthUsed: bandwidth
+            });
+            await newUser.save();
+        } else {
+            // If user exists, update bandwidth
+            existingUser.bandwidthUsed += bandwidth;
+            await existingUser.save();
+        }
+    } catch (error) {
+        console.error("Error updating bandwidth:", error);
     }
-    else{
-        
-        existingUser.bandwidthUsed=bandwidth+existingUser.bandwidthUsed
-        await existingUser.save()
-    }
-}
-export default updateBandwidth
+};
+
+export default updateBandwidth;
